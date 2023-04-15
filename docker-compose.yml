@@ -1,0 +1,15 @@
+version: '2'
+services:
+  db:
+    image: postgres:14
+    container_name: newpostgres
+    ports:
+      - 5432:5432
+    volumes:
+      - db-store:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: 'testdb'
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "password"
+volumes:
+  db-store:
