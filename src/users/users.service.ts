@@ -1,15 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { DataSource } from 'typeorm';
+import { User } from './entities/user.entity';
 
 @Injectable()
-export class UserService {
+export class UsersService {
+  constructor(private datasource: DataSource) {}
+
   create(createUserDto: CreateUserDto) {
     return 'This action adds a new user';
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll() {
+    const userRegistory = this.datasource.getRepository(User)
+    const users = userRegistory.find()
+    return users;
   }
 
   findOne(id: number) {
